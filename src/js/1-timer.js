@@ -13,6 +13,8 @@ const secondsValue = document.querySelector("[data-seconds]")
 startBtn.addEventListener("click", handleStart)
 let timerId = null;
 let userSelectedDate = null;
+startBtn.disabled = true;
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -30,16 +32,30 @@ const options = {
       }
   },
 };
+
 flatpickr(datetimePicker, options);
 
-function handleStart(event) {
-    
+function handleStart() {
+    startBtn.disabled = true;
+    datetimePicker.disabled = true;
     timerId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = userSelectedDate - currentTime;
         const convertTime = convertMs(deltaTime);
+        
+
+        if (deltaTime <= 0) {
+            clearInterval(timerId);
+            datetimePicker.disabled = false;
+            iziToast.success({ title: "Success", message: "Time is up!" })
+            updateTimerDisplay({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            userSelectedDate = null;
+        return;
+        }
+        
         updateTimerDisplay(convertTime);
     }, 1000)
+    
     
 }
 
@@ -56,11 +72,15 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-const timeConvert = convertMs()
+
+function addLeadingZero(value) {
+    return String(value).padStart(2,"0")
+}
+
 function updateTimerDisplay({ days, hours, minutes, seconds }) {
-    daysValue.textContent = String(days).padStart(2,"0");
-    hoursValue.textContent = String(hours).padStart(2,"0");
-    minutesValue.textContent = String(minutes).padStart(2,"0");
-    secondsValue.textContent = String(seconds).padStart(2,"0");
+    daysValue.textContent = addLeadingZero(days);
+    hoursValue.textContent = addLeadingZero(hours);
+    minutesValue.textContent = addLeadingZero(minutes);
+    secondsValue.textContent = addLeadingZero(seconds);
 }
 
