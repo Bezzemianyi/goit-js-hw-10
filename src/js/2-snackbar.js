@@ -8,14 +8,20 @@ function handleSubmit(event) {
     event.preventDefault();
     const promiseState = event.target.elements.state.value;
     const delay = event.target.elements.delay.value;
-    const result = new Promice((resolve, reject) => {
+    const result = new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (promiseState = resolve) {
-            iziToast.success({ title: "✅", message: `Fulfilled promise in ${delay}ms` })
-            } else if (promiseState = reject) {
-            iziToast.success({ title: "❌", message: `Rejected promise in ${delay}ms` })
+            if (promiseState === "fulfilled") {
+                resolve(delay)
+            } else if (promiseState === "rejected") {
+                reject(delay)  
         }
     },delay)
     })
-    
+    result
+        .then((delay) => {
+        iziToast.success({ title: "✅", message: `Fulfilled promise in ${delay}ms` })
+        })
+        .catch((delay) => {
+        iziToast.error({ title: "❌", message: `Rejected promise in ${delay}ms` })
+    })
 }

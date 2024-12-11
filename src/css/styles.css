@@ -85,3 +85,67 @@ body {
   text-transform: uppercase;
 }
 /* #endregion Timer */
+
+/* #region Snackbar */
+.form-label {
+  display: block;
+}
+.form-input-delay {
+  box-sizing: border-box;
+  width: 360px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  padding: 8px 0 8px 16px;
+  border: 1px solid #808080;
+  border-radius: 4px;
+}
+.form-input-delay:hover {
+  border: 1px solid #000;
+}
+
+.form-input-delay:focus {
+  border: 1px solid #4e75ff;
+  outline: transparent;
+}
+.fieldset {
+  box-sizing: border-box;
+  width: 360px;
+  padding: 0;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  margin-top: 16px;
+}
+
+.fieldset:hover,
+.fieldset:focus {
+  border: 1px solid #000;
+}
+
+.fieldset-container {
+  padding: 14px 48px 8px;
+  text-align: center;
+}
+.fieldset-label {
+}
+.submit-btn {
+  border-radius: 8px;
+  padding: 8px 100px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background-color: #4e75ff;
+  border: none;
+  margin-top: 24px;
+}
+
+.submit-btn:hover {
+  background-color: #6c8cff;
+}
+/* #endregion Snackbar */
